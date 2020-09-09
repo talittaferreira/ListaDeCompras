@@ -35,4 +35,12 @@ public class Produto {
     public void setUrgente(boolean urgente) {
         this.urgente = urgente;
     }
+
+    public String toString(){
+        String str = this.produto + " ("+ preco +")";
+        if(urgente){
+            str += " *";
+        }
+        return str;
+    }
 }
