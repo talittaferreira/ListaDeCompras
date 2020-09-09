@@ -5,7 +5,7 @@ public class Produto {
     private String produto;
     private boolean urgente;
 
-    public Produto(float preço, String produto, boolean urgente){
+    public Produto(float preco, String produto, boolean urgente){
         this.preco = preco;
         this.produto = produto;
         this.urgente = urgente;

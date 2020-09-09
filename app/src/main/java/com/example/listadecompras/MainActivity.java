@@ -45,10 +45,11 @@ public class MainActivity extends AppCompatActivity {
         AdapterView.OnItemLongClickListener itemClickListener = new AdapterView.OnItemLongClickListener() {
             public boolean onItemLongClick(AdapterView<?> listView, View view, int position, long id) {
                 final int localPosition = position;
-                new AlertDialog.Builder(MainActivity.this).setTitle("Remover Produto da Lista").setMessage("Voce realmente deseja excluir?").setIcon(R.drawable.ic_launcher_foreground).setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                new AlertDialog.Builder(MainActivity.this).setTitle("Remover Produto da Lista").setMessage("Voce realmente deseja excluir este produto?").setIcon(R.mipmap.excluir).setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         produtos.remove(localPosition);
                         arrayAdapter.notifyDataSetChanged();
+                        updateFooter();
                     }
                 })
                         .setNegativeButton(R.string.no, null).show();
@@ -59,18 +60,18 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemLongClickListener(itemClickListener);
        }
 
-       public void updateFooter() {
-           float total = 0;
-           float urgente = 0;
-           for (int i = 0; i < produtos.size(); i++) {
-               Produto produto = produtos.get(i);
-               if (produto.isUrgente()) {
-                   urgente += produto.getPreco();
-               }
-               total += produto.getPreco();
-           }
-           footer.setText("Total = " +total+ " : Urgennte = " +urgente);
-       }
+    public void updateFooter() {
+        float total = 0;
+        float urgente = 0;
+        for (int i =0; i < produtos.size(); i++) {
+            Produto produto = produtos.get(i);
+            if (produto.isUrgente()) {
+                urgente +=  produto.getPreco();
+            }
+            total += produto.getPreco();
+        }
+        footer.setText("Total = " +total+ " : Urgente = " +urgente);
+    }
 
 
     public void addProduto( View view){
@@ -81,5 +82,8 @@ public class MainActivity extends AppCompatActivity {
         Produto produto = new Produto(preco, item, checked);
         produtos.add(produto);
         arrayAdapter.notifyDataSetChanged();
+        updateFooter();
     }
+
+
 }
